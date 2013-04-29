@@ -22,20 +22,22 @@ var replyToMentions = function() {
 	return;
     }
 
-    console.log('dm message check');
     twitter.getMentions(lastMentionId, function(error, mentions) {
-	// This is make sure we don't double reply
-	if (lastMentionId === '1') {
-	    console.log('First run, updating mention id');
-	    return;
-	}
-
 	// If not mentions, move on
 	if (!mentions.length) {
 	    console.log('No mentions to handle');
 	    return;
 	}
 
+	if (lastMentionId === '1') {
+	    console.log('First run, updating mention id');
+	    console.log(mentions[0]);
+	    lastMentionId = mentions[0].id;
+	    console.log(lastMentionId);
+	    return;
+	}
+
+	// This is make sure we don't double reply
 	async.forEachSeries(
 	    mentions,
 	    function(mention, callback) {
@@ -52,15 +54,16 @@ var replyToMentions = function() {
 			}
 
 			if (parseInt(lastMentionId, 10) < parseInt(mention.id, 10)) {
-			    lastMentionId = '' + mention.id;
+			    lastMentionId = mention.id;
 			}
 
-			console.log(lastMentionId);
-			callback(result);
+			callback(null, result);
 		    });
 		});
 	    },
 	    function (error) {
+		console.log(lastMentionId);
+
 		if (error) {
 		    return console.log(error);
 		}
