@@ -1,0 +1,25 @@
+{
+  "name": "frasierkov",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ryanrolds/frasierkov.git"
+  },
+  "author": "Ryan Olds <ryanrolds@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "hiredis": "~0.1.15",
+    "redis": "~0.8.3",
+    "jsdom": "~0.6.0",
+    "async": "~0.2.7",
+    "twit": "~1.1.6",
+    "cron": "~1.0.1",
+    "date-utils": "~1.2.12"
+  }
+}
